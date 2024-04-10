@@ -103,11 +103,7 @@ const StoryForm: FC<StoryFormProps> = ({ initialData, categories }) => {
   };
 
   //TODO: Change form background based on selected category
-<<<<<<< Updated upstream
-
-=======
   //TODO: Move these form fields into a component
->>>>>>> Stashed changes
   return (
     <div className="bg-[url('/cyberpunk.jpg')] bg-cover">
       <div className="h-full p-4 space-y-2 max-w-3xl mx-auto bg-secondary">
@@ -182,7 +178,7 @@ const StoryForm: FC<StoryFormProps> = ({ initialData, categories }) => {
                 )}
               />
               <FormField
-                name="category"
+                name="categoryId"
                 control={form.control}
                 render={({ field }) => (
                   <FormItem className="col-span-2 md:col-span-1">
@@ -277,10 +273,6 @@ const StoryForm: FC<StoryFormProps> = ({ initialData, categories }) => {
                     />
                   </FormControl>
                   <FormDescription>
-<<<<<<< Updated upstream
-                    This will inform the AI on how to generate the story that
-                    unfolds in your story.
-=======
                     This will give a brief description of your story setting
                   </FormDescription>
                   <FormMessage />
@@ -317,7 +309,6 @@ const StoryForm: FC<StoryFormProps> = ({ initialData, categories }) => {
                   </Select>
                   <FormDescription>
                     Select a category for your story
->>>>>>> Stashed changes
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
