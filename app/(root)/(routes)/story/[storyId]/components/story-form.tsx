@@ -31,6 +31,9 @@ import {
 } from "../story-constants/fantasy";
 import { Button } from "@/components/ui/button";
 import { BookOpen } from "lucide-react";
+import axios from "axios";
+import { useToast } from "@/components/ui/use-toast";
+import { useRouter } from "next/navigation";
 
 const difficulties = ["Relaxed", "Adventurer", "Veteran", "Hardcore"];
 
@@ -53,7 +56,7 @@ const formSchema = z.object({
   difficulty: z.string().min(1, {
     message: "Difficulty is required.",
   }),
-  category: z.string().min(1, {
+  categoryId: z.string().min(1, {
     message: "Category is required.",
   }),
 });
@@ -64,6 +67,9 @@ interface StoryFormProps {
 }
 
 const StoryForm: FC<StoryFormProps> = ({ initialData, categories }) => {
+  const { toast } = useToast();
+  const router = useRouter();
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: initialData || {
@@ -73,18 +79,35 @@ const StoryForm: FC<StoryFormProps> = ({ initialData, categories }) => {
       seed: "",
       src: "",
       difficulty: undefined,
-      category: undefined,
+      categoryId: undefined,
     },
   });
 
   const isLoading = form.formState.isSubmitting;
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    console.log(values);
+    try {
+      if (initialData) {
+        await axios.patch(`/api/story/${initialData.id}`, values);
+        toast({ description: "Story updated" });
+      } else {
+        await axios.post("/api/story", values);
+        toast({ description: "A new story has begun" });
+      }
+
+      router.refresh();
+      router.push("/");
+    } catch (error) {
+      toast({ variant: "destructive", description: "Something went wrong" });
+    }
   };
 
   //TODO: Change form background based on selected category
+<<<<<<< Updated upstream
 
+=======
+  //TODO: Move these form fields into a component
+>>>>>>> Stashed changes
   return (
     <div className="bg-[url('/cyberpunk.jpg')] bg-cover">
       <div className="h-full p-4 space-y-2 max-w-3xl mx-auto bg-secondary">
@@ -254,8 +277,47 @@ const StoryForm: FC<StoryFormProps> = ({ initialData, categories }) => {
                     />
                   </FormControl>
                   <FormDescription>
+<<<<<<< Updated upstream
                     This will inform the AI on how to generate the story that
                     unfolds in your story.
+=======
+                    This will give a brief description of your story setting
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              name="categoryId"
+              control={form.control}
+              render={({ field }) => (
+                <FormItem className="col-span-2 md:col-span-1">
+                  <FormLabel>Category</FormLabel>
+                  <Select
+                    disabled={isLoading}
+                    onValueChange={field.onChange}
+                    value={field.value}
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue
+                          defaultValue={field.value}
+                          placeholder="Select a category"
+                        />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      {categories.map((category) => (
+                        <SelectItem key={category.id} value={category.id}>
+                          {category.name}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  <FormDescription>
+                    Select a category for your story
+>>>>>>> Stashed changes
                   </FormDescription>
                   <FormMessage />
                 </FormItem>

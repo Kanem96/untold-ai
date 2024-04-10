@@ -37,6 +37,29 @@ model Story {
   category   Category @relation(fields: [categoryId], references: [id])
   categoryId String
 
+  messages Message[]
+
   @@index([categoryId])
   @@fulltext([name])
+}
+
+enum Role {
+  user
+  system
+}
+
+model Message {
+  id      String @id @default(uuid()) @map("_id")
+  role    Role
+  content String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  storyId String
+  userId  String
+
+  story Story @relation(fields: [storyId], references: [id], onDelete: Cascade)
+
+  @@index([storyId])
 }
