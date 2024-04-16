@@ -20,8 +20,9 @@ export async function PATCH(req: Request, { params }: { params: { storyId: strin
             return new NextResponse("Missing required fields", {status: 400})
         }
 
-        const companion = await prismadb.story.update({
+        const story = await prismadb.story.update({
             where: {
+                userId: user.id,
                 id: params.storyId,
             },
             data: {
@@ -37,7 +38,7 @@ export async function PATCH(req: Request, { params }: { params: { storyId: strin
             }
         })
 
-        return NextResponse.json(companion)
+        return NextResponse.json(story)
     } catch (error) {
         console.log("[STORY_PATCH]", error)
         return new NextResponse("Internal Error", {status: 500})
