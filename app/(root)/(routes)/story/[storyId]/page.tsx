@@ -1,7 +1,7 @@
 import prismadb from "@/lib/prismadb";
 import React, { FC } from "react";
-import StoryForm from "./components/story-form";
 import { auth, redirectToSignIn } from "@clerk/nextjs";
+import CreateStoryForm from "./components/create-story-form";
 
 interface StoryIdPageProps {
   params: {
@@ -25,7 +25,7 @@ const StoryIdPage: FC<StoryIdPageProps> = async ({ params }) => {
 
   const categories = await prismadb.category.findMany();
 
-  return <StoryForm initialData={story} categories={categories} />;
+  return <CreateStoryForm initialData={story} categories={categories} />;
 };
 
 export default StoryIdPage;

@@ -61,12 +61,15 @@ const formSchema = z.object({
   }),
 });
 
-interface StoryFormProps {
+interface CreateStoryFormProps {
   initialData: Story | null;
   categories: Category[];
 }
 
-const StoryForm: FC<StoryFormProps> = ({ initialData, categories }) => {
+const CreateStoryForm: FC<CreateStoryFormProps> = ({
+  initialData,
+  categories,
+}) => {
   const { toast } = useToast();
   const router = useRouter();
 
@@ -348,4 +351,4 @@ const StoryForm: FC<StoryFormProps> = ({ initialData, categories }) => {
   );
 };
 
-export default StoryForm;
+export default CreateStoryForm;

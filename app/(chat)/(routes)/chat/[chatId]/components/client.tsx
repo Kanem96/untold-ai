@@ -1,11 +1,12 @@
 "use client";
 
-import StoryHeader from "@/components/story-header";
 import { Message, Story } from "@prisma/client";
 import { useRouter } from "next/navigation";
 import { useCompletion } from "ai/react";
 import React, { FC, FormEvent, useState } from "react";
-import ChatForm from "@/components/ui/chat-form";
+import StoryHeader from "./story-header";
+import StoryMessages from "./story-messages";
+import StoryForm from "./story-form";
 
 interface StoryClientProps {
   story: Story & {
@@ -50,8 +51,8 @@ const StoryClient: FC<StoryClientProps> = ({ story }) => {
   return (
     <div className="flex flex-col h-full p-4 space-y-2">
       <StoryHeader story={story} />
-      <div>Messages</div>
-      <ChatForm
+      <StoryMessages story={story} isLoading={isLoading} messages={messages} />
+      <StoryForm
         isLoading={isLoading}
         input={input}
         handleInputChange={handleInputChange}

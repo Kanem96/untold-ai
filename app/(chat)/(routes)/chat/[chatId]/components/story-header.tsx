@@ -2,7 +2,7 @@
 
 import { Message, Story } from "@prisma/client";
 import React, { FC } from "react";
-import { Button } from "./ui/button";
+import { Button } from "../../../../../../components/ui/button";
 import {
   ChevronLeft,
   Edit,
@@ -11,15 +11,15 @@ import {
   Trash,
 } from "lucide-react";
 import { useRouter } from "next/navigation";
-import AiAvatar from "./ai-avatar";
+import AiAvatar from "../../../../../../components/ai-avatar";
 import { useUser } from "@clerk/nextjs";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "./ui/dropdown-menu";
-import { useToast } from "./ui/use-toast";
+} from "../../../../../../components/ui/dropdown-menu";
+import { useToast } from "../../../../../../components/ui/use-toast";
 import axios from "axios";
 
 interface StoryHeaderProps {

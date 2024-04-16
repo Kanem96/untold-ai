@@ -1,10 +1,10 @@
 import React, { ChangeEvent, FC, FormEvent } from "react";
 import { ChatRequestOptions } from "ai";
-import { Input } from "./input";
-import { Button } from "./button";
+import { Input } from "../../../../../../components/ui/input";
+import { Button } from "../../../../../../components/ui/button";
 import { SendHorizonal } from "lucide-react";
 
-interface ChatFormProps {
+interface StoryFormProps {
   input: string;
   handleInputChange: (
     e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
@@ -16,7 +16,7 @@ interface ChatFormProps {
   isLoading: boolean;
 }
 
-const ChatForm: FC<ChatFormProps> = ({
+const StoryForm: FC<StoryFormProps> = ({
   input,
   handleInputChange,
   onSubmit,
@@ -25,7 +25,7 @@ const ChatForm: FC<ChatFormProps> = ({
   return (
     <form
       onSubmit={onSubmit}
-      className="border-t border-priamry/10 py-4 flex items-center gap-x-2"
+      className="border-t border-primary/10 py-4 flex items-center gap-x-2"
     >
       <Input
         disabled={isLoading}
@@ -41,4 +41,4 @@ const ChatForm: FC<ChatFormProps> = ({
   );
 };
 
-export default ChatForm;
+export default StoryForm;
