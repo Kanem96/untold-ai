@@ -1,8 +1,11 @@
 "use client";
 
 import AiAvatar from "@/components/ai-avatar";
+import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
+import UserAvatar from "@/components/user-avatar";
 import { cn } from "@/lib/utils";
+import { Copy } from "lucide-react";
 import { useTheme } from "next-themes";
 import React, { FC } from "react";
 import { BeatLoader } from "react-spinners";
@@ -59,6 +62,17 @@ const StoryMessage: FC<StoryMessageProps> = ({
           content
         )}
       </div>
+      {role === "user" && <UserAvatar />}
+      {role !== "user" && !isLoading && (
+        <Button
+          onClick={onCopy}
+          className="opacity-0 group-hover:opacity-100 transition"
+          size="icon"
+          variant="ghost"
+        >
+          <Copy className="h-4 w-4" />
+        </Button>
+      )}
     </div>
   );
 };
